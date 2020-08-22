@@ -1,0 +1,44 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.btn{
+  font-size: 1rem;
+  font-weight: bold;
+  width: 100px;
+  padding: 10px 0;
+  margin: 20px;
+  border: none;
+  border-radius: 2px;
+  background: #448AFF;
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+
+.btn::after{
+  content: url("https://i.imgur.com/rwBjNpc.png");
+  display: none;
+  /* width: 25px;
+  height: 20px;
+  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%); */
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 110px;
+  cursor: default;
+}
+
+.btn:focus{
+  outline-style: solid;
+  outline-color: #448AFF;
+  outline-width: 3px;
+  outline-offset: 3px;
+  background: #3f7eeb
+}
+
+.btn:focus::after{
+  display: inline-block;
+}
