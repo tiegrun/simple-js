@@ -1,64 +1,19 @@
 var pokemonRepository = (function(){
-  var pokemonList = [ 
-    {
-      name: "Venusaur",
-      height: 2,
-      weight: 100,
-      types: ["grass", "poison"],
-      abilities: ["chlorophyll", "overgrow"]
-    },
-    {
-      name: "Charizard",
-      height: 1.7,
-      weight: 90.5,
-      types: ["fire", "flying"],
-      abilities: ["blaze", "solar power"],
-    },
-    {
-      name: "Pidgeot",
-      height: 1.5,
-      weight: 39.5,
-      types: ["flying", "normal"],
-      abilities: ["keen eye", "tangled feet", "big pecks"]
-    },
-    {
-      name: "Fearow",
-      height: 1.2,
-      weight: 38,
-      types: ["flying", "normal"],
-      abilities: ["keen eye", "sniper"]
-    },
-    {
-      name: "Nidoking",
-      height: 1.4,
-      weight: 62,
-      types: ["ground", "poison"],
-      abilities: ["poison point", "rivalry", "sheer force"]
-    },
-    {
-      name: "Slowbro",
-      height: 1.6,
-      weight: 78.5,
-      types: ["psychic", "water"],
-      abilities: ["oblivious", "own tempo", "regenerator"]
-    }
-  ];
+  var pokemonList = [];
+  var apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
   function add(item){
-    if(typeof item === "object" && Object.keys(item).length === 5){
-      pokemonList.push(item);
-    }
-    else{
-      console.log(" Definetly, it is not a Pokemon ");
-    }
+    pokemonList.push(item);
   }
 
   function getAll(){
     return pokemonList;
   }
 
-  function showDetails(pokemon){
-    console.log(pokemon);
+  function showDetails(item) {
+    pokemonRepository.loadDetails(item).then(function() {
+      console.log(item);
+    });
   }
 
   function addListItem(pokemon){
@@ -74,23 +29,67 @@ var pokemonRepository = (function(){
     });
   }
 
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+        // JSON used to exchange data back and forth with external servers
+        return response.json();
+        // If the promise is resolved, .then is run 
+            }).then(function (json) {
+        json.results.forEach(function (item) {
+            var pokemon = {
+                name: item.name,
+                detailsUrl: item.url
+            };
+            add(pokemon);
+        });
+        // If the promise is rejected, .catch is run
+    }).catch(function (e) {
+        console.error(e);
+    })
+}
+
+  function loadDetails(item) {
+    var url = item.detailsUrl;
+  return fetch(url).then(function (response) {
+      return response.json();
+  }).then(function (details) {
+      // Adds the details to each item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = Object.keys(details.types);
+  }).catch(function (error) {
+      console.error(error);
+  });
+}
+
+function showDetails(item) {
+  pokemonRepository.loadDetails(item).then(function () {
+      console.log(item);
+  });
+}
+
   return {
     getAll: getAll,
     add: add,
-    addListItem: addListItem
+    addListItem: addListItem,
+    loadList: loadList,
+    loadDetails: loadDetails,
+    showDetails: showDetails
   };
 })();
 
-var parasect = {
-  name: "Parasect",
-  height: 1.0,
-  weight: 29.5,
-  types: ["grass", "bug"],
-  abilities: ["damp", "effect spore", "dry skin"]
-};
 
-pokemonRepository.add(parasect);
 
+<<<<<<< HEAD
 pokemonRepository.getAll().forEach(function(pokemon){
   pokemonRepository.addListItem(pokemon.name);
 })
+=======
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getAll().forEach(function (pokemon) {
+      pokemonRepository.addListItem(pokemon);
+  });
+});
+
+
+>>>>>>> master
