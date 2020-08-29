@@ -18,18 +18,15 @@
   position: relative;
 }
 
-.btn::after{
+/* .btn::after{
   content: url("https://i.imgur.com/rwBjNpc.png");
   display: none;
-  /* width: 25px;
-  height: 20px;
-  clip-path: polygon(75% 0%, 100% 50%, 75% 100%, 0% 100%, 25% 50%, 0% 0%); */
   background: white;
   position: absolute;
   top: 0;
   left: 110px;
   cursor: default;
-}
+} */
 
 .btn:focus{
   outline-style: solid;
