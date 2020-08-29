@@ -18,16 +18,6 @@
   position: relative;
 }
 
-/* .btn::after{
-  content: url("https://i.imgur.com/rwBjNpc.png");
-  display: none;
-  background: white;
-  position: absolute;
-  top: 0;
-  left: 110px;
-  cursor: default;
-} */
-
 .btn:focus{
   outline-style: solid;
   outline-color: #448AFF;
