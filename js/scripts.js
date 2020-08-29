@@ -80,14 +80,7 @@ function showDetails(item) {
 
 
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-pokemonRepository.getAll().forEach(function(pokemon){
-  pokemonRepository.addListItem(pokemon.name);
-})
-=======
-=======
->>>>>>> Stashed changes
+
 pokemonRepository.loadList().then(function () {
   pokemonRepository.getAll().forEach(function (pokemon) {
       pokemonRepository.addListItem(pokemon);
@@ -95,7 +88,4 @@ pokemonRepository.loadList().then(function () {
 });
 
 
-<<<<<<< Updated upstream
->>>>>>> master
-=======
->>>>>>> Stashed changes
+
