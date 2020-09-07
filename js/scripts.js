@@ -114,7 +114,6 @@ var pokemonRepository = (function(){
       unorderedList.style.filter = "none";
       modalContainer.innerHTML = "";
     }
-    
   })
 
   return {
